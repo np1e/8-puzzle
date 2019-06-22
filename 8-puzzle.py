@@ -70,9 +70,6 @@ class Puzzle:
     def getState(self):
         return self.puzzle
 
-    def cost(self):
-        return 1
-
     def expand(self):
         pass
 
@@ -113,6 +110,20 @@ def play_puzzle(puzzle):
     else:
         print("Try again next time!")
 
+def compare(search):
+    print("A* algorithm with manhattan distance:")
+    search.doAlgorithm(Algorithm.a_star, "m", False)
+    print("\nA* algorithm with n wrong tiles:")
+    search.doAlgorithm(Algorithm.a_star, "n", False)
+    print("\nBreadth first algorithm:")
+    search.doAlgorithm(Algorithm.breadth_first, False)
+    print("\nDepth first with 15 max depth:")
+    search.doAlgorithm(Algorithm.depth_first, 15, False)
+    print("\nDepth first with max depth 10:")
+    search.doAlgorithm(Algorithm.depth_first, 10, False)
+    print("\nIterative deepening:")
+    search.doAlgorithm(Algorithm.iter_deepening, False)
+
 def main():
 
     parser = argparse.ArgumentParser(description="Play or let play an 8-Puzzle.")
@@ -123,10 +134,14 @@ def main():
                        help='search for a solution using the depth first algorithm')
     group.add_argument('--di', dest='iterative_depth_first', action='store_true',
                        help='search for a solution using the depth first algorithm with iterative deepening')
-    group.add_argument('-d', dest='max_depth_first', metavar='maximum depth', type=int,
+    group.add_argument('-d', dest='max_depth_first', metavar='MAX DEPTH', type=int,
                        help='search for a solution using the depth first algorithm with a maximum depth')
     group.add_argument('--b', dest='breadth_first', action='store_true',
                         help='search for a solution using the breadth first algorithm')
+    group.add_argument('-a', dest='a_star', metavar='HEURISTIC', type=str,
+                       help='search for solution using the A* algorithm with \'m\' for manhattan distance as heuristic and \'n\' for n wrong tiles as heuristic')
+    group.add_argument('--c', dest='compare', action='store_true',
+                       help='compares all algorithms')
 
     puzzle = Puzzle()
     search = Search(puzzle)
@@ -148,6 +163,10 @@ def main():
         search.doAlgorithm(Algorithm.depth_first)
     elif args.breadth_first:
         search.doAlgorithm(Algorithm.breadth_first)
+    elif args.a_star:
+        search.doAlgorithm(Algorithm.a_star, args.a_star)
+    elif args.compare:
+        compare(search)
 
 
 
