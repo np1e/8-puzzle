@@ -4,8 +4,7 @@
 + [About](#about)
 + [Getting Started](#getting_started)
 + [Usage](#usage)
-+ [TODO](./TODO.md)
-+ [Contributing](../CONTRIBUTING.md)
++ [TODO](#todo)
 
 ## About <a name = "about"></a>
 Python 3 implementation of the 8 puzzle with several algorithms so solve it, e.g. A*, breadth first and iterative deepening.
@@ -153,3 +152,10 @@ Algorithm took 0:00:00.287740 to return with result ULURDLURD
 Iterative deepening:
 Algorithm took 0:00:00.011360 to return with result UULDR
 ```
+
+## TODO <a name="todo"></a>
+
+---
+- [ ] random start state
+- [ ] own start state
+- [ ] own goal state
